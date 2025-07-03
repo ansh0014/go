@@ -1,18 +1,30 @@
 package binarysearch
 
-// SearchInts search given key in the given slice
-// upon finding returns its index, otherwise -1
-func SearchInts(s []int, k int) int {
-	for i, j := 0, len(s)-1; i <= j; {
-		h := (i + j) / 2
-		switch {
-		case s[h] < k:
-			i = h + 1
-		case s[h] > k:
-			j = h - 1
-		default:
-			return h
-		}
-	}
-	return -1
+// SearchInts performs a binary search for the given key in the sorted slice.
+// Returns the index of the key if found, otherwise returns -1.
+// The input slice must be sorted in ascending order.
+func SearchInts(slice []int, key int) int {
+    if len(slice) == 0 {
+        return -1
+    }
+
+    left := 0
+    right := len(slice) - 1
+
+    for left <= right {
+        mid := (left + right) / 2
+
+        if slice[mid] == key {
+            return mid
+        }
+
+        if slice[mid] < key {
+            left = mid + 1
+        } else {
+            right = mid - 1
+        }
+    }
+
+    return -1
 }
+
